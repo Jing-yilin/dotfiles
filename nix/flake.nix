@@ -22,6 +22,20 @@
           pkgs.mkalias
           pkgs.obsidian
           pkgs.alacritty
+          # pkgs.arc-browser
+          # pkgs.raycast
+          # pkgs.vscode
+          # pkgs.emacs-textmate
+          # pkgs.notion
+          # pkgs.snipaste
+          # pkgs.alttab
+          # pkgs.warp-terminal
+          # pkgs.bitwarden-desktop
+          # pkgs.appcleaner
+          # pkgs.git
+          # pkgs.tmux
+          # pkgs.zsh
+          # pkgs.oh-my-zsh
         ];
 
       homebrew = {
@@ -36,6 +50,8 @@
           # "Yoink" = 457622435;
         };
         # onActivation.cleanup = "zap";
+        onActivation.autoUpdate = true;
+        onActivation.upgrade = true;
       };
 
       fonts.packages = [
@@ -61,6 +77,21 @@
           ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
         done
             '';
+
+      system.defaults = {
+        dock.autohide = true;
+        dock.persistent-apps = [
+          # "${pkgs.alacritty}/Applications/Alacritty.app"
+          # "${pkgs.obsidian}/Applications/Obsidian.app"
+          "/System/Applications/Mail.app"
+          "/System/Applications/Calendar.app"
+          "/Applications/Arc.app"
+        ];
+        finder.FXPreferredViewStyle = "clmv";
+        loginwindow.GuestEnabled = false;
+        NSGlobalDomain.AppleICUForce24HourTime = true;
+        # NSGlobaLDomain.AppleInterfaceStyle = "Dark";
+      };
 
       # Auto upgrade nix package and the daemon service.
       services.nix-daemon.enable = true;
