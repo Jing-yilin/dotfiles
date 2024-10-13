@@ -6,9 +6,11 @@
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    # emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew}:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, emacs-overlay }:
   let
     configuration = { pkgs, config, ... }: {
 
@@ -20,15 +22,13 @@
         [ 
           pkgs.neovim
           pkgs.mkalias
-          pkgs.obsidian
-          pkgs.alacritty
+          # pkgs.obsidian
           # pkgs.arc-browser
           # pkgs.raycast
           # pkgs.vscode
           # pkgs.emacs-textmate
           # pkgs.notion
           # pkgs.snipaste
-          # pkgs.alttab
           # pkgs.warp-terminal
           # pkgs.bitwarden-desktop
           # pkgs.appcleaner
@@ -39,6 +39,11 @@
           # pkgs.keka
           # pkgs.termius
           # pkgs.jq
+          # pkgs.htop
+          # pkgs.fzf
+          # pkgs.tree
+          # pkgs.ffmpeg
+          # pkgs.discord
         ];
 
       homebrew = {
@@ -47,18 +52,35 @@
           "mas"
         ];
         casks = [
-          "hammerspoon"
+          "alt-tab"
+          # "chatgpt"
+          # "whatsapp"
+          # "cursor"
+          # "element"
+          # "wechat"
+          # "mac-mouse-fix"
+          # "qlmarkdown"
+          # "lulu"
+          # "zipic"
+          # "only-switch"
+          # "orbstack"
         ];
         masApps = {
           # "Yoink" = 457622435;
+          # "Quantumult X" = 1443988620;
+          # "Things" = 904280696;
+          # "Bob" = 1630034110;
         };
-        # onActivation.cleanup = "zap";
+        onActivation.cleanup = "zap";
         onActivation.autoUpdate = true;
         onActivation.upgrade = true;
       };
 
       fonts.packages = [
-        (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+        (pkgs.nerdfonts.override { fonts = [
+          "JetBrainsMono"
+          "Hack"
+        ]; })
       ];
 
       system.activationScripts.applications.text = let
@@ -84,7 +106,6 @@
       system.defaults = {
         dock.autohide = true;
         dock.persistent-apps = [
-          # "${pkgs.alacritty}/Applications/Alacritty.app"
           # "${pkgs.obsidian}/Applications/Obsidian.app"
           "/System/Applications/Mail.app"
           "/System/Applications/Calendar.app"
