@@ -36,6 +36,9 @@
           # pkgs.tmux
           # pkgs.zsh
           # pkgs.oh-my-zsh
+          # pkgs.keka
+          # pkgs.termius
+          # pkgs.jq
         ];
 
       homebrew = {
